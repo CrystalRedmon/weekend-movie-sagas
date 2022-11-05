@@ -38,7 +38,7 @@ We've added some movie posters in the `public/images` folder, and the database i
 
 ## Feature List
 
-> NOTE: Start by taking inventory of the existing code. Part of the work for setting up sagas has been done for you.
+x > NOTE: Start by taking inventory of the existing code. Part of the work for setting up sagas has been done for you.
 
 ### Home / List Page
 
