@@ -1,23 +1,21 @@
-import {useDispatch, useSelector} from 'react-redux';
-import {useParams} from 'react-router-dom';
-import {useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
 
 
-function MovieItem(){
+function MovieItem() {
     // GET MOVIE INFO FROM REDUX STORE
-    const activeMovieDetails = useSelector(store=> store.movies)
+    const activeMovie = useSelector(store => store.activeMovie)
     // PARAMS IDENTIFIES THE ID OF THE MOVIE
     const params = useParams();
     // USED TO MAKE ACTION REQUESTS TO REDUCER
     const dispatch = useDispatch();
 
-    console.log('params.id,', params.id, "vs Active movie details: ", activeMovieDetails[params.id]);
-    console.log('movie')
- 
+    console.log('Active movie', activeMovie);
 
     // CALL TO GET INFO FROM DATABASE FOR SPECIFIC MOVIEITEM BASED ON PARAMS.ID
-    useEffect(()=>{
+    useEffect(() => {
         dispatch({
             type: 'SET_ACTIVE_MOVIE',
             payload: `/${params.id}`
@@ -25,13 +23,16 @@ function MovieItem(){
     }, [params.id])
 
 
-    return(<>
-    
-    <h1>MovieItem Name</h1>
+    return (<>
 
-    
-    
-    
+        <h1>{activeMovie.title}</h1>
+        <div>
+            <img src={activeMovie.poster} alt="movie poster" />
+            <p>{activeMovie.description}</p>
+        </div>
+
+
+
     </>)
 }
 
