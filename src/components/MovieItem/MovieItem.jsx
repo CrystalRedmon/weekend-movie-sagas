@@ -12,16 +12,17 @@ function MovieItem(){
     // USED TO MAKE ACTION REQUESTS TO REDUCER
     const dispatch = useDispatch();
 
-    console.log('params.id,', params.id, "vs Active movie details: ", activeMovieDetails.id);
+    console.log('params.id,', params.id, "vs Active movie details: ", activeMovieDetails[params.id]);
+    console.log('movie')
  
 
     // CALL TO GET INFO FROM DATABASE FOR SPECIFIC MOVIEITEM BASED ON PARAMS.ID
     useEffect(()=>{
         dispatch({
-            type: 'SET_ACTIVE_BOOK',
-            payload: `movie/${params.id}`
+            type: 'SET_ACTIVE_MOVIE',
+            payload: `/${params.id}`
         })
-    }, [])
+    }, [params.id])
 
 
     return(<>
