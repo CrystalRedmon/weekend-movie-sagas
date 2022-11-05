@@ -15,14 +15,14 @@ For this weekend challenge you'll be expanding on a movie management application
 
 ## Database Setup
 
-1. Create a database named `saga_movies_weekend`
-2. Run the queries from `database.sql` on the `saga_movies_weekend` database
+x 1. Create a database named `saga_movies_weekend`
+x 2. Run the queries from `database.sql` on the `saga_movies_weekend` database
 
 ## Install Dependencies
 
-1. `npm install`
-2. `npm run server`
-3. `npm run client`
+x 1. `npm install`
+x 2. `npm run server`
+x 3. `npm run client`
 
 ## Notes
 

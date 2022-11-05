@@ -13,7 +13,8 @@ function App() {
         
         {/* Details page */}
 
-        {/* Add Movie page */}
+        {/* ⬇️ STRETCH GOAL */}
+        {/* Add Movie page */} 
       </Router>
     </div>
   );
