@@ -36,6 +36,7 @@ function* setActiveMovie(action){
         const activeMovie = yield axios.get(`/api/movie/${action.payload}`);
         console.log('get active movie', activeMovie.data);
         yield put({ type: 'SET_ACTIVE_MOVIE', payload: activeMovie.data});
+        console.log('Finally Active', activeMovie.data);
     } catch {
         console.log('setActiveMovie failed');
     }
@@ -65,11 +66,22 @@ const genres = (state = [], action) => {
     }
 }
 
+const activeMovie = (state =[], action) =>{
+    switch (action.type){
+        case 'SET_ACTIVE_MOVIE':
+            return action.payload
+        default:
+            return state;    
+    }
+}
+
+
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
+        activeMovie
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
