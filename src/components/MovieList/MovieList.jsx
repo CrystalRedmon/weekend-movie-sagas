@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './MovieList.css'
-import MovieItem from '../MovieItem/MovieItem';
 import { Link } from 'react-router-dom';
 
 function MovieList() {
@@ -12,6 +11,7 @@ function MovieList() {
     useEffect(() => {
         dispatch({ type: 'FETCH_MOVIES' });
     }, []);
+    
 
     return (
         <main>
@@ -19,7 +19,7 @@ function MovieList() {
             <section className="movies">
                 {movies.map(movie => {
                     return (
-                        <Link key={movie.id} to= "/details/:id">
+                        <Link key={movie.id} to={`/details/${movie.id}`}>
                             <div >
                                 <h3>{movie.title}</h3>
                                 <img src={movie.poster} alt={movie.title} />
