@@ -30,6 +30,7 @@ function MovieItem() {
             <img src={activeMovie.poster} alt="movie poster" />
             <p>{activeMovie.description}</p>
         </div>
+        
 
 
 
