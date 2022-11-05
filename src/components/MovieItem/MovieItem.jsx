@@ -1,5 +1,5 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector} from 'react-redux';
+import { useParams, useHistory  } from 'react-router-dom';
 import { useEffect } from 'react';
 
 
@@ -11,6 +11,8 @@ function MovieItem() {
     const params = useParams();
     // USED TO MAKE ACTION REQUESTS TO REDUCER
     const dispatch = useDispatch();
+    // USED TO NAVIGATE TO LIST PAGE
+    const history = useHistory();
 
     console.log('Active movie', activeMovie);
 
@@ -22,6 +24,10 @@ function MovieItem() {
         })
     }, [params.id])
 
+    function handleOnClick(){
+        history.push("/")
+
+    }
 
     return (<>
 
@@ -30,7 +36,7 @@ function MovieItem() {
             <img src={activeMovie.poster} alt="movie poster" />
             <p>{activeMovie.description}</p>
         </div>
-        
+        <button onClick={handleOnClick}>Back To List</button>
 
 
 
