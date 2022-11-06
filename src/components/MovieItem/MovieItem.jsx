@@ -29,6 +29,8 @@ function MovieItem() {
     const history = useHistory();
 
     console.log('Movie genres', genres);
+    const genreString = genres.join(', ');
+    console.log('genre string', genreString);
 
     // CALL TO GET INFO FROM DATABASE FOR SPECIFIC MOVIEITEM BASED ON PARAMS.ID
     useEffect(() => {
@@ -51,20 +53,16 @@ function MovieItem() {
     return (<>
         <ThemeProvider theme={darkTheme}>
             <CssBaseline>
-                
+
                 <Grid container
                     justifyContent="center"
                     alignItems="center" item spacing={0}>
 
                     <Card sx={{ minWidth: 275, maxWidth: 700 }}>
                         <CardContent>
-                            <Typography sx={{fontSize: '2em'}} >{activeMovie.title}</Typography>
+                            <Typography sx={{ fontSize: '2em' }} >{activeMovie.title}</Typography>
                             <img src={activeMovie.poster} alt="movie poster" width='300' />
-                            <div>Genres: {genres.map((genre, index) => (
-                                <ul key={index}>
-                                    <li >{genre}</li>
-                                </ul>
-                            ))}</div>
+                            <div>Genres: {genreString} </div>
                             <Typography sx={{ textAlign: 'justify' }}>{activeMovie.description}</Typography>
                         </CardContent>
 
