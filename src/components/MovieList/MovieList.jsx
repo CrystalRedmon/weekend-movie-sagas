@@ -10,13 +10,9 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-const darkTheme = createTheme({
-    palette: {
-        mode: 'dark',
-    },
-});
+
+
 
 function MovieList() {
 
@@ -29,7 +25,7 @@ function MovieList() {
 
 
     return (
-        <ThemeProvider theme={darkTheme}>
+       
             <CssBaseline>
                 <main >
 
@@ -57,7 +53,7 @@ function MovieList() {
 
                 </main>
             </CssBaseline>
-        </ThemeProvider>
+        
     );
 }
 
