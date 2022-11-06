@@ -33,7 +33,7 @@ function MovieList() {
             <CssBaseline>
                 <main >
 
-                    <Typography>MovieList</Typography>
+                    {/* <Typography sx={{fontSize: '1.75em'}}>MovieList</Typography> */}
                     <section className="movies">
                         <Grid container
                             justifyContent="center"
@@ -41,9 +41,9 @@ function MovieList() {
                             {movies.map((movie, index) => {
                                 return (
                                     <Grid key={index} item spacing={5}>
-                                        <Card sx={{ minWidth: 275 }}>
+                                        <Card sx={{ minWidth: 275, maxWidth: 300 }}>
                                             <CardContent>
-                                                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>{movie.title}</Typography>
+                                                <Typography sx={{ fontSize: '1.5em' }} color="text.secondary" gutterBottom>{movie.title}</Typography>
                                                 <Link to={`/details/${movie.id}`}>
                                                     <img src={movie.poster} alt={movie.title} />
                                                 </Link>

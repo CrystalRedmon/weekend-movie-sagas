@@ -51,25 +51,26 @@ function MovieItem() {
     return (<>
         <ThemeProvider theme={darkTheme}>
             <CssBaseline>
-                <Typography>{activeMovie.title}</Typography>
+                
                 <Grid container
                     justifyContent="center"
-                    alignItems="center" item spacing={6}>
+                    alignItems="center" item spacing={0}>
 
-                    <Card sx={{ minWidth: 275, maxWidth: 500}}>
+                    <Card sx={{ minWidth: 275, maxWidth: 700 }}>
                         <CardContent>
-                            <img src={activeMovie.poster} alt="movie poster" />
+                            <Typography sx={{fontSize: '2em'}} >{activeMovie.title}</Typography>
+                            <img src={activeMovie.poster} alt="movie poster" width='300' />
                             <div>Genres: {genres.map((genre, index) => (
                                 <ul key={index}>
                                     <li >{genre}</li>
                                 </ul>
                             ))}</div>
-                            <p>{activeMovie.description}</p>
+                            <Typography sx={{ textAlign: 'justify' }}>{activeMovie.description}</Typography>
                         </CardContent>
 
                     </Card>
                 </Grid>
-                <button onClick={handleOnClick}>Back To List</button>
+                <Button onClick={handleOnClick}>Back To List</Button>
 
             </CssBaseline>
         </ThemeProvider>
