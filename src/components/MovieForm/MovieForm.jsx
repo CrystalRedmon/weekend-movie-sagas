@@ -1,20 +1,28 @@
 import { FormControl, Input, ButtonGroup, Button, TextField, Select, MenuItem, InputLabel } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import CssBaseline from '@mui/material/CssBaseline';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
 
 
 
 function MovieForm() {
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_ALL_GENRES' })
+
+    }, []);
+
+
     const dispatch = useDispatch();
-    const genre= useSelector(store=> store.genres);
+    const genres = useSelector(store => store.genres);
     const [newMovie, setNewMovie] = useState({
         title: '',
         poster: '',
         description: '',
         genre: ''
     })
-    console.log(genre);
+    console.log(genres);
 
     const addMovieTitle = (event) => {
         setNewMovie({
@@ -93,11 +101,35 @@ function MovieForm() {
                         placeholder='Movie Description' />
                 </FormControl><br />
 
-
+                <select
+                    onChange={addMovieGenre}
+                    value=""
+                >
+                    <option value="" disabled>Select a category</option>
+                    {genres.map(genre => (
+                        <option key={genre.id} value={genre.id}>{genre.name}</option>
+                    ))}
+                </select>
                 {/* TODO- CREATE DROPDOWN AND ADD REMAINING GENRES */}
 
+                <Button type='submit'>Submit</Button>
+            </form>
+        </CssBaseline>
+    </>)
+}
 
-                <ButtonGroup variant="contained">
+export default MovieForm;
+
+
+{/* <Input
+                    onClick={addMovieDescription}
+                    id="description"
+                    type="dropdown"
+                    placeholder='Movie Description' /> */}
+
+
+
+{/* <ButtonGroup variant="contained">
                     <Button
                         onClick={addMovieGenre}
                         value='adventure'
@@ -116,12 +148,8 @@ function MovieForm() {
                     >Biographical</Button>
                 </ButtonGroup>
 
-                <Button type='submit'>Submit</Button>
-            </form>
-
-
-
-            {/* <FormControl width={'300'}>
+                // <Button type='submit'>Submit</Button> */}
+{/* <FormControl width={'300'}>
                 <InputLabel>Genre</InputLabel>
                 <Select
                     onChange={addMovieGenre}
@@ -140,19 +168,3 @@ function MovieForm() {
                     </MenuItem>
                 </Select>
             </FormControl> */}
-
-
-
-
-        </CssBaseline>
-    </>)
-}
-
-export default MovieForm;
-
-
-{/* <Input
-                    onClick={addMovieDescription}
-                    id="description"
-                    type="dropdown"
-                    placeholder='Movie Description' /> */}

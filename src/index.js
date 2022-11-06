@@ -19,6 +19,7 @@ function* rootSaga() {
     yield takeEvery('SET_ACTIVE_MOVIE', setActiveMovie);
     yield takeEvery('FETCH_ACTIVE_MOVIE_GENRE', fetchActiveMovieGenre);
     yield takeEvery('CREATE_NEW_MOVIE', createNewMovie);
+    yield takeEvery('FETCH_ALL_GENRES', fetchAllGenres);
 }
 
 function* fetchAllMovies() {
@@ -80,7 +81,7 @@ function* createNewMovie(action){
     try {
         yield axios.post('/api/movie', {data: action.payload})
         console.log('add new movie', action.payload);
-        yield put({type: 'CREATE_NEW_MOVIE', payload: action.payload})
+        // yield put({type: 'CREATE_NEW_MOVIE', payload: action.payload})
     }catch {
         console.log('POST new movie failed')
     }
@@ -100,11 +101,11 @@ const movies = (state = [], action) => {
     switch (action.type) {
         case 'SET_MOVIES':
             return action.payload;
-        case 'CREATE_NEW_MOVIE':
-            return [
-                ...state,
-                action.payload
-            ];
+        // case 'CREATE_NEW_MOVIE':
+        //     return [
+        //         ...state,
+        //         action.payload
+        //     ];
         default:
             return state;
     }
