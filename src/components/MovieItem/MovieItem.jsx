@@ -1,12 +1,13 @@
-import { useDispatch, useSelector} from 'react-redux';
-import { useParams, useHistory  } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams, useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 
 
 
 function MovieItem() {
     // GET MOVIE INFO FROM REDUX STORE
-    const activeMovie = useSelector(store => store.activeMovie)
+    const activeMovie = useSelector(store => store.activeMovie);
+    const genres = useSelector(store => store.genres);
     // PARAMS IDENTIFIES THE ID OF THE MOVIE
     const params = useParams();
     // USED TO MAKE ACTION REQUESTS TO REDUCER
@@ -14,7 +15,7 @@ function MovieItem() {
     // USED TO NAVIGATE TO LIST PAGE
     const history = useHistory();
 
-    console.log('Active movie', activeMovie);
+    console.log('Movie genres', genres);
 
     // CALL TO GET INFO FROM DATABASE FOR SPECIFIC MOVIEITEM BASED ON PARAMS.ID
     useEffect(() => {
@@ -29,7 +30,7 @@ function MovieItem() {
         })
     }, [params.id])
 
-    function handleOnClick(){
+    function handleOnClick() {
         history.push("/")
 
     }
@@ -39,6 +40,13 @@ function MovieItem() {
         <h1>{activeMovie.title}</h1>
         <div>
             <img src={activeMovie.poster} alt="movie poster" />
+            <p>Genres: {genres.map(genre => (
+                <span>
+                    {genre}
+                </span>
+
+
+            ))}</p>
             <p>{activeMovie.description}</p>
         </div>
         <button onClick={handleOnClick}>Back To List</button>
