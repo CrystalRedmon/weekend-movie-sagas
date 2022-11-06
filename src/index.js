@@ -16,6 +16,7 @@ function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('SET_ACTIVE_MOVIE', setActiveMovie);
     yield takeEvery('FETCH_GENRES', fetchGenres);
+    yield takeEvery('CREATE_NEW_MOVIE', createNewMovie);
 }
 
 function* fetchAllMovies() {
@@ -57,6 +58,23 @@ function* fetchGenres(action){
 
 }
 
+/// POST NEW MOVIE INFO TO DATABASE AND ADD NEW MOVIE TO REDUX STORE
+function* createNewMovie(action){
+    console.log('👨‍👩‍👧')
+    try {
+        yield axios.post('/api/movie', {data: action.payload})
+        console.log('add new movie', action.payload);
+        yield put({type: 'CREATE_NEW_MOVIE', payload: action.payload})
+    }catch {
+        console.log('POST new movie failed')
+    }
+
+}
+
+
+
+
+
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
@@ -66,6 +84,11 @@ const movies = (state = [], action) => {
     switch (action.type) {
         case 'SET_MOVIES':
             return action.payload;
+        case 'CREATE_NEW_MOVIE':
+            return [
+                ...state,
+                action.payload
+            ];
         default:
             return state;
     }
