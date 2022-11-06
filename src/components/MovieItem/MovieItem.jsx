@@ -40,13 +40,11 @@ function MovieItem() {
         <h1>{activeMovie.title}</h1>
         <div>
             <img src={activeMovie.poster} alt="movie poster" />
-            <p>Genres: {genres.map(genre => (
-                <span>
-                    {genre}
-                </span>
-
-
-            ))}</p>
+            <div>Genres: {genres.map((genre, index) => (
+                <ul key={index}>
+                    <li >{genre}</li>
+                </ul>
+            ))}</div>
             <p>{activeMovie.description}</p>
         </div>
         <button onClick={handleOnClick}>Back To List</button>
