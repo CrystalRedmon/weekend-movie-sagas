@@ -22,6 +22,11 @@ function MovieItem() {
             type: 'SET_ACTIVE_MOVIE',
             payload: `/${params.id}`
         })
+
+        dispatch({
+            type: 'FETCH_GENRES',
+            payload: `/${params.id}`
+        })
     }, [params.id])
 
     function handleOnClick(){
