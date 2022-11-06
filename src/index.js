@@ -81,7 +81,6 @@ function* createNewMovie(action){
     try {
         yield axios.post('/api/movie', {data: action.payload})
         console.log('add new movie', action.payload);
-        // yield put({type: 'CREATE_NEW_MOVIE', payload: action.payload})
     }catch {
         console.log('POST new movie failed')
     }
@@ -101,17 +100,12 @@ const movies = (state = [], action) => {
     switch (action.type) {
         case 'SET_MOVIES':
             return action.payload;
-        // case 'CREATE_NEW_MOVIE':
-        //     return [
-        //         ...state,
-        //         action.payload
-        //     ];
         default:
             return state;
     }
 }
 
-// Used to store the movie genres
+// USED TO STORE ALL GENRES AND ACTIVE MOVIE GENRE
 const genres = (state = [], action) => {
     switch (action.type) {
         case 'SET_GENRES':
@@ -123,6 +117,7 @@ const genres = (state = [], action) => {
     }
 }
 
+//USED TO STORE ALL MOVIES
 const activeMovie = (state = [], action) => {
     switch (action.type) {
         case 'SET_ACTIVE_MOVIE':
