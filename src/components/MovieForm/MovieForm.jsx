@@ -1,5 +1,5 @@
 import { FormControl, Input, ButtonGroup, Button, TextField, Select, MenuItem, InputLabel } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CssBaseline from '@mui/material/CssBaseline';
 import { useState } from 'react';
 
@@ -7,13 +7,14 @@ import { useState } from 'react';
 
 function MovieForm() {
     const dispatch = useDispatch();
+    const genre= useSelector(store=> store.genres);
     const [newMovie, setNewMovie] = useState({
         title: '',
         poster: '',
         description: '',
         genre: ''
     })
-
+    console.log(genre);
 
     const addMovieTitle = (event) => {
         setNewMovie({

@@ -36,7 +36,7 @@ function MovieItem() {
         })
 
         dispatch({
-            type: 'FETCH_GENRES',
+            type: 'FETCH_ACTIVE_MOVIE_GENRE',
             payload: `/${params.id}`
         })
     }, [params.id])
