@@ -2,6 +2,21 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './MovieList.css'
 import { Link } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+const darkTheme = createTheme({
+    palette: {
+        mode: 'dark',
+    },
+});
 
 function MovieList() {
 
@@ -14,42 +29,36 @@ function MovieList() {
 
 
     return (
-        <main>
-            <h1>MovieList</h1>
-            <section className="movies">
-                {movies.map((movie, index)=> {
-                    return (
-                        <div key={index} >
-                            <h3>{movie.title}</h3>
-                            <Link to={`/details/${movie.id}`}>
-                                <img src={movie.poster} alt={movie.title} />
-                            </Link>
+        <ThemeProvider theme={darkTheme}>
+            <CssBaseline>
+                <main >
 
-                        </div>
+                    <Typography>MovieList</Typography>
+                    <section className="movies">
+                        <Grid container
+                            justifyContent="center"
+                            alignItems="center" item spacing={5}>
+                            {movies.map((movie, index) => {
+                                return (
+                                    <Grid key={index} item spacing={5}>
+                                        <Card sx={{ minWidth: 275 }}>
+                                            <CardContent>
+                                                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>{movie.title}</Typography>
+                                                <Link to={`/details/${movie.id}`}>
+                                                    <img src={movie.poster} alt={movie.title} />
+                                                </Link>
+                                            </CardContent>
+                                        </Card>
+                                    </Grid>
+                                );
+                            })}
+                        </Grid>
+                    </section>
 
-                    );
-                })}
-            </section>
-        </main>
-
+                </main>
+            </CssBaseline>
+        </ThemeProvider>
     );
 }
 
 export default MovieList;
-{/* <MovieItem movie={movie}/> */ }
-
-
-{/* <section className="movies">
-                {movies.map(movie => {
-                    return (
-                        <div key={movie.id}>
-                            <h3>{movie.title}</h3>
-                            <Link  to={`/details/${movie.id}`}>
-                                <img src={movie.poster} alt={movie.title} />
-                            </Link>
-
-                        </div>
-
-                    );
-                })}
-            </section> */}
