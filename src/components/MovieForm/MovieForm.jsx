@@ -89,23 +89,27 @@ function MovieForm() {
                             onChange={addMovieTitle}
                             id="movie_title"
                             type="text"
-                            placeholder='Movie Title' />
+                            placeholder='Movie Title'
+                            required />
                     </FormControl>
                     <FormControl >
                         <Input
                             onChange={addMoviePoster}
                             id="poster_url"
                             type="url"
-                            placeholder='Poster URL' />
+                            placeholder='Poster URL'
+                            required />
                     </FormControl>
                     <FormControl >
                         <Input
                             onChange={addMovieDescription}
                             id="description"
                             type="textarea"
-                            placeholder='Movie Description' />
+                            placeholder='Movie Description'
+                            required />
                     </FormControl>
                     <select
+                        required
                         onChange={addMovieGenre}
                         value="">
                         <option name="dropFrom" value="" disabled>Select a category</option>
