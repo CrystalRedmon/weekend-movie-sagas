@@ -111,7 +111,7 @@ function MovieForm() {
                     <select
                         required
                         onChange={addMovieGenre}
-                        value="">
+                        value={newMovie.genre}>
                         <option name="dropFrom" value="" disabled>Select a category</option>
                         {genres.map(genre => (
                             <option key={genre.id} value={genre.id}>{genre.name}</option>
