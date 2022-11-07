@@ -19,15 +19,12 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
 
   const movieID = req.params;
-  // console.log('movieID', Number(movieID.id));
-  // console.log('movieID', movieID);
-
-
   // GET INFO FOR DETAILS VIEW
   const detailsQuery = `SELECT "title", "poster", "description"
                         FROM "movies"
                         WHERE "id" = $1;`
 
+  // USED NUMBER TO CONVERT FROM STRING TO INT
   const sqlParams = [Number(movieID.id)]
   pool.query(detailsQuery, sqlParams)
     .then(dbRes => {
@@ -42,13 +39,13 @@ router.get('/:id', (req, res) => {
 
 })
 
-
-
-
-
-
 router.post('/', (req, res) => {
+
   console.log(req.body);
+  const newMovie = (req.body.data)
+  // USED NUMBER TO CONVERT FROM STRING TO INT
+  const genreID = Number(newMovie.genre);
+
   // RETURNING "id" will give us back the id of the created movie
   const insertMovieQuery = `
   INSERT INTO "movies" ("title", "poster", "description")
@@ -56,7 +53,7 @@ router.post('/', (req, res) => {
   RETURNING "id";`
 
   // FIRST QUERY MAKES MOVIE
-  pool.query(insertMovieQuery, [req.body.title, req.body.poster, req.body.description])
+  pool.query(insertMovieQuery, [newMovie.title, newMovie.poster, newMovie.description])
     .then(result => {
       console.log('New Movie Id:', result.rows[0].id); //ID IS HERE!
 
@@ -65,10 +62,15 @@ router.post('/', (req, res) => {
       // Now handle the genre reference
       const insertMovieGenreQuery = `
       INSERT INTO "movies_genres" ("movie_id", "genre_id")
-      VALUES  ($1, $2);
-      `
+      VALUES  ($1, $2);`;
+
+      const sqlParams = [
+        createdMovieId,
+        genreID
+      ]
+
       // SECOND QUERY ADDS GENRE FOR THAT NEW MOVIE
-      pool.query(insertMovieGenreQuery, [createdMovieId, req.body.genre_id]).then(result => {
+      pool.query(insertMovieGenreQuery, sqlParams).then(result => {
         //Now that both are done, send back success!
         res.sendStatus(201);
       }).catch(err => {

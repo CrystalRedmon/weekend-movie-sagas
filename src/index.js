@@ -12,14 +12,18 @@ import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
 
 // Create the rootSaga generator function
+// LISTENS FOR DISPATCHES FROM COMPONENTS. 
+//INTERCEPTS TO SAGAS FOR CENTRALIZED DB REQUESTS 
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('SET_ACTIVE_MOVIE', setActiveMovie);
-    yield takeEvery('FETCH_GENRES', fetchGenres);
+    yield takeEvery('FETCH_ACTIVE_MOVIE_GENRE', fetchActiveMovieGenre);
+    yield takeEvery('CREATE_NEW_MOVIE', createNewMovie);
+    yield takeEvery('FETCH_ALL_GENRES', fetchAllGenres);
 }
 
 function* fetchAllMovies() {
-    // get all movies from the DB
+    // get all movies from the DB AND UPDATES REDUX STORE
     try {
         const movies = yield axios.get('/api/movie');
         console.log('get all:', movies.data);
@@ -31,8 +35,21 @@ function* fetchAllMovies() {
 
 }
 
-function* setActiveMovie(action) {
+/// GETS LIST OF ALL GENRE CATEGORIES AND UPDATES REDUX STORE
+function* fetchAllGenres() {
+    try {
+        const genres = yield axios.get('/api/genre');
+        console.log('get all:', genres.data);
+        yield put({ type: 'SET_GENRES', payload: genres.data });
 
+    } catch {
+        console.log('get all error');
+    }
+
+}
+
+/// GETS MOVIE INFO FOR THE MOVIE ITEM SELECTED AND UPDATES REDUX STORE
+function* setActiveMovie(action) {
     try {
         const activeMovie = yield axios.get(`/api/movie/${action.payload}`);
         console.log('get active movie', activeMovie.data);
@@ -44,18 +61,35 @@ function* setActiveMovie(action) {
 
 }
 
-function* fetchGenres(action){
+/// GET GENRES FOR THE MOVIE ITEM SELECTED AND UPDATES REDUX STORE
+function* fetchActiveMovieGenre(action){
     console.log('😀')
     try {
         const activeMovieGenres = yield axios.get(`/api/genre/${action.payload}`);
         console.log('get active movie genre', activeMovieGenres.data);
-        yield put({ type: 'SET_GENRES', payload: activeMovieGenres.data });
+        yield put({ type: 'ACTIVE_MOVIE_GENRE', payload: activeMovieGenres.data });
         console.log('Active Genres', activeMovieGenres.data);
     } catch {
         console.log('setActiveMovie failed');
     }
 
 }
+
+/// POST NEW MOVIE INFO TO DATABASE AND ADD NEW MOVIE TO REDUX STORE
+function* createNewMovie(action){
+    console.log('👨‍👩‍👧')
+    try {
+        yield axios.post('/api/movie', {data: action.payload})
+        console.log('add new movie', action.payload);
+    }catch {
+        console.log('POST new movie failed')
+    }
+
+}
+
+
+
+
 
 
 // Create sagaMiddleware
@@ -71,16 +105,19 @@ const movies = (state = [], action) => {
     }
 }
 
-// Used to store the movie genres
+// USED TO STORE ALL GENRES AND ACTIVE MOVIE GENRE
 const genres = (state = [], action) => {
     switch (action.type) {
         case 'SET_GENRES':
+            return action.payload;
+        case 'ACTIVE_MOVIE_GENRE':
             return action.payload;
         default:
             return state;
     }
 }
 
+//USED TO STORE ALL MOVIES
 const activeMovie = (state = [], action) => {
     switch (action.type) {
         case 'SET_ACTIVE_MOVIE':
