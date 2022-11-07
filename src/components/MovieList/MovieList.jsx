@@ -19,6 +19,7 @@ function MovieList() {
         dispatch({ type: 'FETCH_MOVIES' });
     }, []);
 
+    // NAVIAGE TO MOVIEFORM TO ADD NEW MOVIE
     const toAddNewMovie = () => {
         history.push('/form');
       }
@@ -49,7 +50,6 @@ function MovieList() {
                         })}
                     </Grid>
                 </section>
-
             </main>
         </CssBaseline>
 

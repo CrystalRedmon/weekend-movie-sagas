@@ -16,9 +16,8 @@ router.get('/', (req, res) => {
 
 });
 
-
-
 router.get('/:id', (req, res) => {
+  
   // Add query to get all genres
   const movieID = req.params;
   const sqlParams = [Number(movieID.id)];

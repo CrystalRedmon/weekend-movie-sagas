@@ -20,16 +20,13 @@ function App() {
         <header>
           <h1>The Movies Saga!</h1>
         </header>
-
         <Router>
           <Route path="/" exact>
             <MovieList />
           </Route>
-
           <Route path="/details/:id" exact>
             <MovieItem />
           </Route>
-
           <Route path='/form/' exact>
             <MovieForm />
           </Route>

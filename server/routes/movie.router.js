@@ -19,15 +19,12 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
 
   const movieID = req.params;
-  // console.log('movieID', Number(movieID.id));
-  // console.log('movieID', movieID);
-
-
   // GET INFO FOR DETAILS VIEW
   const detailsQuery = `SELECT "title", "poster", "description"
                         FROM "movies"
                         WHERE "id" = $1;`
 
+  // USED NUMBER TO CONVERT FROM STRING TO INT
   const sqlParams = [Number(movieID.id)]
   pool.query(detailsQuery, sqlParams)
     .then(dbRes => {
@@ -42,18 +39,13 @@ router.get('/:id', (req, res) => {
 
 })
 
-
-
-
-
-
 router.post('/', (req, res) => {
+
   console.log(req.body);
   const newMovie = (req.body.data)
-
-  console.log('Come on REQ', newMovie.genre);
+  // USED NUMBER TO CONVERT FROM STRING TO INT
   const genreID = Number(newMovie.genre);
-  console.log(genreID)
+
   // RETURNING "id" will give us back the id of the created movie
   const insertMovieQuery = `
   INSERT INTO "movies" ("title", "poster", "description")
@@ -71,7 +63,6 @@ router.post('/', (req, res) => {
       const insertMovieGenreQuery = `
       INSERT INTO "movies_genres" ("movie_id", "genre_id")
       VALUES  ($1, $2);`;
-
 
       const sqlParams = [
         createdMovieId,

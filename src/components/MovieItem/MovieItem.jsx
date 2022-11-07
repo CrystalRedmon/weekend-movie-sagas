@@ -23,13 +23,12 @@ function MovieItem() {
     const dispatch = useDispatch();
     // USED TO NAVIGATE TO LIST PAGE
     const history = useHistory();
-
-    console.log('Movie genres', genres);
+    // USED TO CREATE STRING FROM RETURNED GENRE ARRAY
     const genreString = genres.join(', ');
-    console.log('genre string', genreString);
-
+    
     // CALL TO GET INFO FROM DATABASE FOR SPECIFIC MOVIEITEM BASED ON PARAMS.ID
     useEffect(() => {
+        
         dispatch({
             type: 'SET_ACTIVE_MOVIE',
             payload: `/${params.id}`
@@ -41,9 +40,9 @@ function MovieItem() {
         })
     }, [params.id])
 
+    /// NAVIGATE BACK TO MOVIELIST
     function handleOnClick() {
         history.push("/")
-
     }
 
     return (<>
@@ -53,7 +52,6 @@ function MovieItem() {
             <Grid container
                 justifyContent="center"
                 alignItems="center" item spacing={0}>
-
                 <Card sx={{ minWidth: 275, maxWidth: 700 }}>
                     <CardContent>
                         <Typography sx={{ fontSize: '2em' }} >{activeMovie.title}</Typography>
@@ -61,11 +59,8 @@ function MovieItem() {
                         <div>Genres: {genreString} </div>
                         <Typography sx={{ textAlign: 'justify' }}>{activeMovie.description}</Typography>
                     </CardContent>
-
                 </Card>
             </Grid>
-
-
         </CssBaseline>
 
     </>)
