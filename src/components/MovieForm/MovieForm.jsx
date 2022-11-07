@@ -2,6 +2,9 @@ import { FormControl, Input, ButtonGroup, Button, TextField, Select, MenuItem, I
 import { useDispatch, useSelector } from 'react-redux';
 import CssBaseline from '@mui/material/CssBaseline';
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom'
+import Grid from '@mui/material/Grid';
+import TextareaAutosize from '@mui/base/TextareaAutosize';
 
 
 
@@ -13,7 +16,7 @@ function MovieForm() {
 
     }, []);
 
-
+    const history = useHistory();
     const dispatch = useDispatch();
     const genres = useSelector(store => store.genres);
     const [newMovie, setNewMovie] = useState({
@@ -69,102 +72,68 @@ function MovieForm() {
     }
 
 
-
+    const toAddNewMovie = () => {
+        history.push('/');
+    }
 
     return (<>
         <CssBaseline>
-            <h1>Add More Movies</h1>
-            <form onSubmit={handleSubmit}>
-                <FormControl >
+            <header>
+                <h1>Add More Movies</h1>
+                <Button onClick={toAddNewMovie} >
+                    Back to List
+                </Button>
+            </header>
+            <form onSubmit={handleSubmit} >
+                <Grid
+                    container
+                    direction={'column'}
+                    
+                    sx={{ minWidth: 275, maxWidth: 700, margin: 'auto', mt:'5em'}}
+                    >
 
-                    <Input
-                        onChange={addMovieTitle}
-                        id="movie_title"
-                        type="text"
-                        placeholder='Movie Title' />
-                </FormControl>
+                    <FormControl >
 
-                {/* TODO CHANGE POSTER INPUT TO TYPE URL */}
-                <FormControl >
-                    <Input
-                        onChange={addMoviePoster}
-                        id="poster_url"
-                        type="text"
-                        placeholder='Poster URL' />
-                </FormControl>
+                        <Input
+                            onChange={addMovieTitle}
+                            id="movie_title"
+                            type="text"
+                            placeholder='Movie Title' />
+                    </FormControl>
 
-                <FormControl >
-                    <Input
-                        onChange={addMovieDescription}
-                        id="description"
-                        type="textarea"
-                        placeholder='Movie Description' />
-                </FormControl><br />
+                    {/* TODO CHANGE POSTER INPUT TO TYPE URL */}
+                    <FormControl >
+                        <Input
+                            onChange={addMoviePoster}
+                            id="poster_url"
+                            type="text"
+                            placeholder='Poster URL' />
+                    </FormControl>
 
-                <select
-                    onChange={addMovieGenre}
-                    value=""
-                >
-                    <option value="" disabled>Select a category</option>
-                    {genres.map(genre => (
-                        <option key={genre.id} value={genre.id}>{genre.name}</option>
-                    ))}
-                </select>
-                {/* TODO- CREATE DROPDOWN AND ADD REMAINING GENRES */}
+                    <FormControl >
+                        <Input
+                            onChange={addMovieDescription}
+                            id="description"
+                            type="textarea"
+                            placeholder='Movie Description' />
+                    </FormControl>
 
-                <Button type='submit'>Submit</Button>
+                    <select
+                        onChange={addMovieGenre}
+                        value=""
+                    >
+                        <option value="" disabled>Select a category</option>
+                        {genres.map(genre => (
+                            <option key={genre.id} value={genre.id}>{genre.name}</option>
+                        ))}
+                    </select>
+                    {/* TODO- CREATE DROPDOWN AND ADD REMAINING GENRES */}
+
+                    <Button type='submit'>Submit</Button>
+                </Grid>
             </form>
         </CssBaseline>
     </>)
 }
 
 export default MovieForm;
-
-
-{/* <Input
-                    onClick={addMovieDescription}
-                    id="description"
-                    type="dropdown"
-                    placeholder='Movie Description' /> */}
-
-
-
-{/* <ButtonGroup variant="contained">
-                    <Button
-                        onClick={addMovieGenre}
-                        value='adventure'
-                    >Adventure
-
-                    </Button>
-
-                    <Button
-                        onClick={addMovieGenre}
-                        value='animated'
-                    >Animated</Button>
-
-                    <Button
-                        onClick={addMovieGenre}
-                        value='biographical'
-                    >Biographical</Button>
-                </ButtonGroup>
-
-                // <Button type='submit'>Submit</Button> */}
-{/* <FormControl width={'300'}>
-                <InputLabel>Genre</InputLabel>
-                <Select
-                    onChange={addMovieGenre}
-                    value={'genre'}
-                    label="Genre">
-
-
-                    <MenuItem
-                        value={'adventure'}>Adventure
-                    </MenuItem>
-                    <MenuItem
-                        value={'animated'}>Animated
-                    </MenuItem>
-                    <MenuItem
-                        value={'biographical'}>Biographical
-                    </MenuItem>
-                </Select>
-            </FormControl> */}

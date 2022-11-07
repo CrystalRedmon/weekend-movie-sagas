@@ -47,27 +47,27 @@ function MovieItem() {
     }
 
     return (<>
-        
-            <CssBaseline>
 
-                <Grid container
-                    justifyContent="center"
-                    alignItems="center" item spacing={0}>
+        <CssBaseline>
+            <Button onClick={handleOnClick}>Back To List</Button>
+            <Grid container
+                justifyContent="center"
+                alignItems="center" item spacing={0}>
 
-                    <Card sx={{ minWidth: 275, maxWidth: 700 }}>
-                        <CardContent>
-                            <Typography sx={{ fontSize: '2em' }} >{activeMovie.title}</Typography>
-                            <img src={activeMovie.poster} alt="movie poster" width='300' />
-                            <div>Genres: {genreString} </div>
-                            <Typography sx={{ textAlign: 'justify' }}>{activeMovie.description}</Typography>
-                        </CardContent>
+                <Card sx={{ minWidth: 275, maxWidth: 700 }}>
+                    <CardContent>
+                        <Typography sx={{ fontSize: '2em' }} >{activeMovie.title}</Typography>
+                        <img src={activeMovie.poster} alt="movie poster" width='300' />
+                        <div>Genres: {genreString} </div>
+                        <Typography sx={{ textAlign: 'justify' }}>{activeMovie.description}</Typography>
+                    </CardContent>
 
-                    </Card>
-                </Grid>
-                <Button onClick={handleOnClick}>Back To List</Button>
+                </Card>
+            </Grid>
 
-            </CssBaseline>
-        
+
+        </CssBaseline>
+
     </>)
 }
 
